@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <list :items="list" @remove-item="removeItem"/>
+        <list :items="sharedState.items" @remove-item="removeItem"/>
         <add-item-form @add-item="addItem"/>
     </div>
 </template>
@@ -9,7 +9,7 @@
     import uuid from 'uuid/v4';
     import List from './components/List';
     import AddItemForm from './components/AddItemForm';
-    import axios from 'axios';
+    import store from './store';
 
     export default {
         name: 'app',
@@ -19,20 +19,18 @@
         },
         data() {
             return {
-                list: []
+                sharedState: store.state
             }
         },
-        async created() {
-            this.list = await axios.get('https://NflArrest.com/api/v1/crime').then(res => res.data.map((v, k) => {
-                return {id: uuid(), name: v.Category}
-            }))
+        created() {
+            store.fetchItems()
         },
         methods: {
             addItem(name) {
-                this.list.push({id: uuid(), name})
+                this.sharedState.items.push({id: uuid(), name})
             },
             removeItem(id) {
-                this.list = this.list.filter(item => item.id !== id);
+                this.sharedState.items = this.sharedState.items.filter(item => item.id !== id);
             }
         }
     }
