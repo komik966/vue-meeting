@@ -18,7 +18,7 @@
         },
         data() {
             return {
-                list: [{id: 1, name: "Foo"}, {id: 2, name: "Bar"}]
+                list: [{id: '1', name: "Foo"}, {id: '2', name: "Bar"}]
             }
         },
         methods: {
