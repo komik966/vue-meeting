@@ -22,8 +22,9 @@
 
 <div id="app">
     <ul>
-    <li v-for="item in list">{{ item.name }}</li>
+        <li v-for="item in list">{{ item.name }}</li>
     </ul>
+    <button @click="addItem()">Add item</button>
 </div>
 
 
@@ -33,6 +34,11 @@
         el: '#app',
         data: {
             list: [{id: 1, name: "Foo"}, {id: 2, name: "Bar"}]
+        },
+        methods: {
+            addItem() {
+                this.list.push({id: 3, name: "Baz"})
+            }
         }
     })
 </script>
