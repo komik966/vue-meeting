@@ -1,7 +1,7 @@
 <template>
     <ul>
         <li v-for="item in items" :key="item.id">
-            <list-item :name="item.Category" :id="item.id" @remove-item="$emit('remove-item', $event)"/>
+            <list-item :name="item.name" :id="item.id" @remove-item="$emit('remove-item', $event)"/>
         </li>
     </ul>
 </template>

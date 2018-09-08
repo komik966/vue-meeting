@@ -23,7 +23,9 @@
             }
         },
         async created() {
-            this.list = await axios.get('https://NflArrest.com/api/v1/crime').then(res => res.data)
+            this.list = await axios.get('https://NflArrest.com/api/v1/crime').then(res => res.data.map((v, k) => {
+                return {id: uuid(), name: v.Category}
+            }))
         },
         methods: {
             addItem(name) {
