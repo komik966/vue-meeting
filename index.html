@@ -22,9 +22,9 @@
 
 <div id="app">
     <ul>
-        <li v-for="item in list">{{ item.name }}</li>
+        <li v-for="item in list">{{item.id}} {{ item.name }}</li>
     </ul>
-    <button @click="addItem()">Add item</button>
+    <input type="text" v-model="newItemName"/> <button @click="addItem()">Add item</button>
 </div>
 
 
@@ -33,11 +33,12 @@
     const app = new Vue({
         el: '#app',
         data: {
-            list: [{id: 1, name: "Foo"}, {id: 2, name: "Bar"}]
+            list: [{id: 1, name: "Foo"}, {id: 2, name: "Bar"}],
+            newItemName: ''
         },
         methods: {
             addItem() {
-                this.list.push({id: 3, name: "Baz"})
+                this.list.push({id: this.list[this.list.length - 1].id + 1, name: this.newItemName})
             }
         }
     })
