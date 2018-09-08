@@ -9,6 +9,7 @@
     import uuid from 'uuid/v4';
     import List from './components/List';
     import AddItemForm from './components/AddItemForm';
+    import axios from 'axios';
 
     export default {
         name: 'app',
@@ -18,8 +19,11 @@
         },
         data() {
             return {
-                list: [{id: '1', name: "Foo"}, {id: '2', name: "Bar"}]
+                list: []
             }
+        },
+        async created() {
+            this.list = await axios.get('https://NflArrest.com/api/v1/crime').then(res => res.data)
         },
         methods: {
             addItem(name) {
