@@ -22,9 +22,13 @@
 
 <div id="app">
     <ul>
-        <li v-for="item in list">{{item.id}} {{ item.name }}</li>
+        <li v-for="item in list">
+            {{item.id}} {{ item.name }}
+            <button @click="removeItem(item.id)">x</button>
+        </li>
     </ul>
-    <input type="text" v-model="newItemName"/> <button @click="addItem()">Add item</button>
+    <input type="text" v-model="newItemName"/>
+    <button @click="addItem()">Add item</button>
 </div>
 
 
@@ -39,6 +43,14 @@
         methods: {
             addItem() {
                 this.list.push({id: this.list[this.list.length - 1].id + 1, name: this.newItemName})
+            },
+            removeItem(id) {
+                for (i = 0; i < this.list.length - 1; i++) {
+                    if (this.list[i].id !== id) {
+                        continue;
+                    }
+                    this.list.splice(i, 1)
+                }
             }
         }
     })
