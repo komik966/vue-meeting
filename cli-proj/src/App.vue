@@ -2,6 +2,7 @@
     <div id="app">
         <list :items="sharedState.items" @remove-item="removeItem"/>
         <add-item-form @add-item="addItem"/>
+        <input type="number" v-model="sharedState.itemsLimit" @change="reloadItems()"/>
     </div>
 </template>
 
@@ -26,6 +27,9 @@
             store.fetchItems()
         },
         methods: {
+            reloadItems() {
+                store.fetchItems()
+            },
             addItem(name) {
                 this.sharedState.items.push({id: uuid(), name})
             },
